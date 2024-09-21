@@ -12,3 +12,4 @@ struct Character: Codable {
     let status: String
     let image: String
 }
+    
