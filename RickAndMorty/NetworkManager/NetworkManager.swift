@@ -14,25 +14,25 @@ class NetworkManager {
     
     private let baseURL = "https://rickandmortyapi.com/api/character"
     
-    func fetchCharacters(completion: @escaping ([Character]?) -> Void) {
-        guard let url = URL(string: baseURL) else {
-            completion(nil)
-            return
-        }
-        
+    func fetchCharacters(page: Int = 1, completion: @escaping ([Character]?) -> Void) {
+        let urlString = "https://rickandmortyapi.com/api/character?page=\(page)"
+        guard let url = URL(string: urlString) else { return }
+
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completion(nil)
                 return
             }
-            
+
             do {
-                let result = try JSONDecoder().decode([String: [Character]].self, from: data)
-                completion(result["results"])
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(RickAndMortyResponse.self, from: data)
+                completion(response.results)
             } catch {
                 completion(nil)
             }
         }
         task.resume()
     }
+
 }
