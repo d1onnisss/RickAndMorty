@@ -60,7 +60,7 @@ class CharacterDetailViewController: UIViewController {
     private func displayCharacterDetails() {
         nameLabel.text = character.name
         
-        if let url = URL(string: character.image) {
+        if let url = URL(string: character.image!) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {

@@ -25,9 +25,6 @@ class Cell: UITableViewCell {
         return label
     }()
     
-    // No need for imageCache anymore since Kingfisher handles it
-    // private let imageCache = NSCache<NSString, UIImage>()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -58,7 +55,7 @@ class Cell: UITableViewCell {
     func configure(with character: Character) {
         name.text = character.name
 
-        guard let url = URL(string: character.image) else { return }
+        guard let url = URL(string: character.image!) else { return }
         characterImage.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.25))])
     }
 }

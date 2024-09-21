@@ -11,6 +11,7 @@ struct Character: Codable {
     let id: Int
     let name: String
     let status: String
+    let image: String?
 }
 
 struct RickAndMortyResponse: Codable {
